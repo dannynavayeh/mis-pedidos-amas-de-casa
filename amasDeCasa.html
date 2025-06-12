@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos Frescos a tu Hogar - Formulario</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Verde principal */
+            --secondary-color: #007bff; /* Azul para botones secundarios */
+            --accent-color: #f0f8f0; /* Color claro de fondo */
+            --text-color: #333;
+            --light-text-color: #777;
+            --border-color: #e0e0e0;
+            --bg-color: #f9f9f9;
+            --white: #fff;
+            --red-error: #dc3545;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 35px;
+            font-weight: 600;
+            font-size: 2.2em;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--text-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            text-align: right;
+        }
+
+        .product-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            background-color: var(--accent-color);
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .product-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 400;
+            font-size: 0.95em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+            color: var(--text-color);
+            background-color: var(--white);
+            transition: all 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .button {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+        }
+        .button:active {
+            transform: translateY(0);
+        }
+
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: var(--white);
+            width: auto;
+            min-width: 180px;
+        }
+        button[type="submit"]:hover {
+            background-color: #43a047; /* Tono más oscuro de verde */
+        }
+
+        button#add-product {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            margin-right: 15px;
+            min-width: 200px;
+        }
+        button#add-product:hover {
+            background-color: #0069d9; /* Tono más oscuro de azul */
+        }
+
+        .delete-button {
+            background-color: var(--red-error);
+            color: var(--white);
+            padding: 8px 12px;
+            font-size: 0.9em;
+            float: right;
+            margin-top: -15px; /* Adjust to position correctly */
+            margin-right: -15px; /* Adjust to position correctly */
+            border-radius: 4px;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        .buttons-container {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Footer Styles */
+        .footer-info {
+            text-align: center;
+            color: var(--light-text-color);
+            font-size: 0.9em;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 700px;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+        .footer-info h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        .footer-info p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        .footer-info strong {
+            color: var(--text-color);
+        }
+        .footer-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-info a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Pide tus productos frescos ahora!</h1>
+
+        <form id="orderForm" action="https://formspree.io/f/mqabqgqj" method="POST">
+
+            <h2>Tus Datos de Contacto</h2>
+            <div class="form-group">
+                <label for="client_name">Nombre Completo:</label>
+                <input type="text" id="client_name" name="client_name" required placeholder="Ej: María Guadalupe Pérez">
+            </div>
+            <div class="form-group">
+                <label for="client_email">Correo Electrónico:</label>
+                <input type="email" id="client_email" name="client_email" required placeholder="Ej: tu.correo@ejemplo.com">
+            </div>
+            <div class="form-group">
+                <label for="client_whatsapp">Número de WhatsApp:</label>
+                <input type="tel" id="client_whatsapp" name="client_whatsapp" required pattern="[0-9]{10}" placeholder="Ej: 5512345678 (10 dígitos)">
+                <small style="color: var(--light-text-color);">Por favor, ingresa solo números, incluyendo la clave LADA si aplica (ej: 55 para CDMX).</small>
+            </div>
+
+            <h2>Tu Pedido</h2>
+            <div id="product-list">
+                <div class="product-item" id="product-item-1">
+                    <button type="button" class="delete-button" onclick="removeProduct(this)">Eliminar</button>
+                    <h3>Producto #1</h3>
+                    <div class="form-group">
+                        <label for="product_name_1">Nombre del Producto:</label>
+                        <select id="product_name_1" name="products[0][name]" required>
+                            <option value="">Selecciona un producto</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity_1">Cantidad:</label>
+                        <input type="number" id="quantity_1" name="products[0][quantity]" min="0.01" step="0.01" required placeholder="Ej: 2.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="unit_1">Unidad de medida:</label>
+                        <select id="unit_1" name="products[0][unit]" required>
+                            <option value="kilo">Kilo</option>
+                            <option value="pieza">Pieza</option>
+                            <option value="litro">Litro</option>
+                            <option value="manojo">Manojo</option>
+                            <option value="domo">DOMO</option>
+                            <option value="docena">Docena</option>
+                            <option value="bolsa">Bolsa</option>
+                            <option value="paquete">Paquete</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="comments">Comentarios Adicionales (opcional):</label>
+                <textarea id="comments" name="comments" placeholder="¿Alguna instrucción especial para tu pedido?"></textarea>
+            </div>
+
+            <div class="buttons-container">
+                <button type="button" id="add-product" class="button">Agregar Otro Producto</button>
+                <button type="submit" class="button">Enviar Pedido</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="footer-info">
+        <h3>PEDIDOS</h3>
+        <p><strong>Delfino Luis Hernández</strong></p>
+        <p>Encargado</p>
+        <p>Cel: <a href="tel:+525530560298">55 3056 0298</a></p>
+        <p>Correo: <a href="mailto:dlh198019@yahoo.com">dlh198019@yahoo.com</a></p>
+    </div>
+
+    <script>
+        let productCount = 1;
+        const productListDiv = document.getElementById('product-list');
+        const addProductButton = document.getElementById('add-product');
+        const orderForm = document.getElementById('orderForm');
+
+        // List of products to populate the dropdown
+        const productOptions = [
+            "ACELGA MJO CH", "ACITRON", "AGUACATE HASS", "AJO ITALIANO", "AJO MACHO",
+            "AJOS EN CABEZA", "ALBACAR", "ALBACAR MJO MJO CH", "ALBACAR ORGANICA",
+            "ALCACHOFA GDE", "ALCACHOFA MEDIANA", "ALFALFA", "ALMENDRA", "APIO",
+            "ARANDANO", "ARNICA MJO CH", "ARUGULA", "ARUGULA BABY", "BERENJENA",
+            "BERRO", "BERZA", "BETABEL", "BLUE BERRY", "BROCOLI", "CALABAZA BOLA",
+            "CALABAZA CASTILLA", "CALABAZA ITALIANA", "CAMOTE", "CARAMBOLA", "CEBOLLA BLANCA",
+            "CEBOLLA CAMBRAY CON RABO", "CEBOLLA CAMBRAY LIMPIA", "CEBOLLA MORADA",
+            "CEBOLLIN", "CEREZA", "CHAMBARETE C/HUESO", "CHAMPIÑON", "CHAYOTE",
+            "CHICHARO JAPONES", "CHICHARO LIMPIO", "CHICHARO VAINA", "CHICOZAPOTE",
+            "CHILACAYOTE", "CHILE ANCHO", "CHILE CASCABEL", "CHILE CHIPOTLE SECO",
+            "CHILE CUARESMEÑO", "CHILE DE ARBOL SECO", "CHILE DE ARBOL VERDE",
+            "CHILE GUAJILLO", "CHILE HABANERO", "CHILE MANZANO", "CHILE MORITA",
+            "CHILE MULATO", "CHILE PASILLA", "CHILE PIQUIN MOLIDO", "CHILE POBLANO",
+            "CHILE PULLA", "CHILE SERRANO VERDE", "CHIRIMOYA", "CILANTRO MJO CH",
+            "CIRUELA MOSCATEL", "CIRUELA ROJA", "COCO", "COCO RAYADO", "COL BLANCA",
+            "COL DE BRUSELAS", "COL MORADA", "COLIFLOR MR. LUCKY", "DURAZNO CRIOLLO",
+            "DURAZNO MELOCOTON", "ECHALOT AMERICANO", "ECHALOT NACIONAL", "EJOTE",
+            "EJOTE FRANCES", "ELOTE", "ELOTE EN GRANOS", "ENELDO CON BULBO", "EPAZOTE MJO CH",
+            "ESPARRAGO", "ESPINACA MJO CH", "ESPINACA BABY 180 GR", "ESPINACA BABY ECONOMICA",
+            "FLOR DE CALABAZA", "FRAMBUESA", "FRESA", "GERMEN DE ALFALFA", "GERMEN DE SOYA",
+            "GRANADA CHINA", "GRANADA ROJA", "GUANABANA", "GUAYABA", "HABA FRESCA VAINA",
+            "HABA VERDE LIMPIA", "HIERBABUENA MJO CH", "HIERBAS DE OLOR", "HIGO",
+            "HOJA DE AGUACATE", "HOJA DE LAUREL", "HOJA DE LIMON", "HOJA DE MENTA",
+            "HOJA DE MIXIOTE PAPEL", "HOJA DE OREGANO FRESCO", "HOJA DE PENCA DE MAGUEY",
+            "HOJA SANTA", "HOJAS DE NARANJO", "HOJAS DE PLATANO", "HONGO PORTOBELLO",
+            "HONGO SETAS BLANCAS", "HUAZONTLE", "HUEVO", "HUITLACOCHE", "JAMAICA",
+            "JENGIBRE", "JICAMA", "JITOMATE BOLA", "JITOMATE CHERRY", "JITOMATE GUAJE",
+            "KIWI", "KIWI DORADO", "LECHUGA COGOLLO", "LECHUGA ENDIVIA 400 GR",
+            "LECHUGA ESCAROLA", "LECHUGA FRANCESA", "LECHUGA FREZZY", "LECHUGA ITALIANA",
+            "LECHUGA OREJONA MR. LUCKY", "LECHUGA RADICCIO", "LECHUGA ROMANA MR. LUCKY",
+            "LECHUGA SANGRIA", "LECHUGA SUCRINE 3 PZAS. 6 GR", "LIMA", "LIMON AMARILLO",
+            "LIMON CON SEMILLA", "LIMON SIN SEMILLA", "LYCHEE", "MAIZ POZOLERO", "MAMEY",
+            "MANDARINA GRANDE", "MANDARINA PARA JUGO", "MANGO ATAULFO", "MANGO MANILA",
+            "MANGO PETACON", "MANZANA GALA", "MANZANA GOLDEN AMERICANA", "MANZANA SMITH",
+            "MANZANA STARKING (ROJA)", "MANZANILLA", "MARACUYA", "MEJORANA 200 GR",
+            "MELON CHINO", "MELON VALENCIANO", "NABO", "NARANJA", "NARANJA SIN SEMILLA",
+            "NARANJA VALENCIANA", "NOPAL", "NOPAL CAMBRAY", "NUEZ", "OREGANO FRESCO",
+            "PAPA BLANCA", "PAPA CAMBRAY", "PAPAYA", "PEPINILLO", "PEPINO", "PEPINO EUROPEO",
+            "PERA ASIATICA", "PERA BOSS", "PERA MANTEQUILLA", "PERA ROJA", "PEREJIL CHINO",
+            "PEREJIL LISO MJO CH", "PERSIMO", "PIMIENTO AMARILLO", "PIMIENTO NARANJA",
+            "PIMIENTO ROJO", "PIMIENTO VERDE", "PIÑA CRISTALIZADA", "PIÑA MIEL",
+            "PIÑON BLANCO", "PIÑON ROSA", "PITAHAYA", "PLATANO DOMINICO", "PLATANO MACHO",
+            "PLATANO TABASCO", "PORO", "PULPA BLUE BERRY", "PULPA DE FRAMBUESA",
+            "PULPA DE FRESA", "PULPA DE GUANABANA", "PULPA DE MAMEY", "PULPA DE MANGO",
+            "PULPA DE MARACUYA", "PULPA DE TAMARINDO", "PULPA DE ZAPOTE", "PULPA DE ZARZAMORA",
+            "QUELITES", "QUINTONIL", "RABANO CAMBRAY", "RABANO LARGO", "RAMBUTAN",
+            "ROMERO DE OLOR MJO CH", "ROMEROS", "RUDA", "SANDIA CON SEMILLA - PESO MINIMO 6 KG",
+            "SANDIA SIN SEMILLA CHICA (1.5 KG - 5 KG)", "SAVILA", "SOPA DE VERDURA",
+            "TAMARINDO", "TE DE LIMON", "TOMATE LIMPIO", "TOMATILLO LIMPIO", "TOMILLO FRESCO",
+            "TORONJA", "TUNA", "UVA ROJA GLOBO", "UVA VERDE S/SEMILLA", "VERDOLAGA",
+            "XOCONOSTLE", "ZANAHORIA CAMBRAY", "ZANAHORIA MEDIANA", "ZAPOTE NEGRO",
+            "ZARZAMORA"
+        ];
+
+        // Function to create a new product item HTML
+        function createProductItem(count) {
+            const productItem = document.createElement('div');
+            productItem.classList.add('product-item');
+            productItem.id = `product-item-${count}`;
+            // Use current productCount as index for names to ensure correct array indexing for Formspree
+            const currentIndex = productCount;
+            productItem.innerHTML = `
+                <button type="button" class="delete-button" onclick="removeProduct(this)">Eliminar</button>
+                <h3>Producto #${count}</h3>
+                <div class="form-group">
+                    <label for="product_name_${count}">Nombre del Producto:</label>
+                    <select id="product_name_${count}" name="products[${currentIndex-1}][name]" required>
+                        <option value="">Selecciona un producto</option>
+                        ${productOptions.map(product => `<option value="${product}">${product}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity_${count}">Cantidad:</label>
+                    <input type="number" id="quantity_${count}" name="products[${currentIndex-1}][quantity]" min="0.01" step="0.01" required placeholder="Ej: 2.5">
+                </div>
+                <div class="form-group">
+                    <label for="unit_${count}">Unidad de medida:</label>
+                    <select id="unit_${count}" name="products[${currentIndex-1}][unit]" required>
+                        <option value="kilo">Kilo</option>
+                        <option value="pieza">Pieza</option>
+                        <option value="litro">Litro</option>
+                        <option value="manojo">Manojo</option>
+                        <option value="domo">DOMO</option>
+                        <option value="docena">Docena</option>
+                        <option value="bolsa">Bolsa</option>
+                        <option value="paquete">Paquete</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+            `;
+            return productItem;
+        }
+
+        // Populate initial product dropdown and set a default unit
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstProductSelect = document.getElementById('product_name_1');
+            if (firstProductSelect) {
+                 firstProductSelect.innerHTML = `<option value="">Selecciona un producto</option>` +
+                                                 productOptions.map(product => `<option value="${product}">${product}</option>`).join('');
+            }
+             // Set default unit for the first item (e.g., 'kilo')
+            const firstUnitSelect = document.getElementById('unit_1');
+            if (firstUnitSelect) {
+                firstUnitSelect.value = 'kilo'; // You can choose a different default if preferred
+            }
+        });
+
+
+        // Event listener for "Add Another Product" button
+        addProductButton.addEventListener('click', () => {
+            productCount++;
+            const newProductItem = createProductItem(productCount);
+            productListDiv.appendChild(newProductItem);
+             // Set default unit for newly added items
+            const newUnitSelect = newProductItem.querySelector(`select[name="products[${productCount-1}][unit]"]`);
+            if (newUnitSelect) {
+                newUnitSelect.value = 'kilo'; // Set 'kilo' as default for new products
+            }
+        });
+
+        // Function to remove a product item
+        function removeProduct(button) {
+            const productItemToRemove = button.closest('.product-item');
+            if (productListDiv.children.length > 1) { // Ensure at least one product item remains
+                productListDiv.removeChild(productItemToRemove);
+                // Re-index product item titles and input names for Formspree
+                updateProductItems();
+            } else {
+                alert("Debe haber al menos un producto en el pedido.");
+            }
+        }
+
+        // Function to update product titles and input names after removal
+        function updateProductItems() {
+            const items = productListDiv.querySelectorAll('.product-item');
+            productCount = items.length; // Update total count
+            items.forEach((item, index) => {
+                const h3 = item.querySelector('h3');
+                if (h3) {
+                    h3.textContent = `Producto #${index + 1}`;
+                }
+
+                // Update 'id' and 'name' attributes
+                item.querySelector('select[id^="product_name_"]').id = `product_name_${index + 1}`;
+                item.querySelector('select[name^="products["]').name = `products[${index}][name]`;
+
+                item.querySelector('input[id^="quantity_"]').id = `quantity_${index + 1}`;
+                item.querySelector('input[name^="products["]').name = `products[${index}][quantity]`;
+
+                item.querySelector('select[id^="unit_"]').id = `unit_${index + 1}`;
+                item.querySelector('select[name^="products["]').name = `products[${index}][unit]`;
+
+                // Update 'for' attributes of labels
+                item.querySelectorAll('label').forEach(label => {
+                    if (label.getAttribute('for').startsWith('product_name_')) {
+                        label.setAttribute('for', `product_name_${index + 1}`);
+                    } else if (label.getAttribute('for').startsWith('quantity_')) {
+                        label.setAttribute('for', `quantity_${index + 1}`);
+                    } else if (label.getAttribute('for').startsWith('unit_')) {
+                        label.setAttribute('for', `unit_${index + 1}`);
+                    }
+                });
+            });
+        }
+
+
+        // Handle form submission - Formspree will now handle the submission directly.
+        orderForm.addEventListener('submit', (event) => {
+            // Client-side validation for required fields
+            let isValid = true;
+
+            // Validate client contact info
+            const clientName = document.getElementById('client_name');
+            const clientEmail = document.getElementById('client_email');
+            const clientWhatsapp = document.getElementById('client_whatsapp');
+
+            if (!clientName.value.trim()) {
+                alert('Por favor, ingresa tu Nombre Completo.');
+                clientName.focus();
+                isValid = false;
+            } else if (!clientEmail.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clientEmail.value)) {
+                alert('Por favor, ingresa un Correo Electrónico válido.');
+                clientEmail.focus();
+                isValid = false;
+            } else if (!clientWhatsapp.value.trim() || !/^[0-9]+$/.test(clientWhatsapp.value) || clientWhatsapp.value.length < 10) {
+                alert('Por favor, ingresa un Número de WhatsApp válido (solo números, mínimo 10 dígitos).');
+                clientWhatsapp.focus();
+                isValid = false;
+            }
+
+            // Validate product items
+            if (isValid) { // Only proceed if client info is valid
+                const productItems = productListDiv.querySelectorAll('.product-item');
+                if (productItems.length === 0) {
+                    alert('Debes agregar al menos un producto a tu pedido.');
+                    isValid = false;
+                } else {
+                    productItems.forEach((item, index) => {
+                        const productName = item.querySelector(`select[name="products[${index}][name]"]`);
+                        const quantityInput = item.querySelector(`input[name="products[${index}][quantity]"]`);
+                        const unit = item.querySelector(`select[name="products[${index}][unit]"]`);
+
+                        if (!productName.value || !quantityInput.value || !unit.value) {
+                             alert(`Por favor, completa todos los campos del Producto #${index + 1}.`);
+                             isValid = false;
+                             productName.focus();
+                             return; // Exit forEach
+                        }
+
+                        const quantityValue = quantityInput.value;
+                        if (isNaN(parseFloat(quantityValue)) || !isFinite(quantityValue) || parseFloat(quantityValue) <= 0) {
+                            alert(`Por favor, ingresa una cantidad válida (número positivo) para el Producto #${index + 1}.`);
+                            isValid = false;
+                            quantityInput.focus();
+                            return; // Exit forEach
+                        }
+                    });
+                }
+            }
+
+
+            if (!isValid) {
+                event.preventDefault(); // Prevent Formspree submission if validation fails
+            } else {
+                // Optionally show a message before redirecting to Formspree's success page
+                // alert('Tu pedido está siendo enviado...');
+            }
+        });
+    </script>
+</body>
+</html>
